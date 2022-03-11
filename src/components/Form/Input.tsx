@@ -1,4 +1,4 @@
-import { forwardRef, FunctionComponent, ReactComponentElement } from 'react';
+import { forwardRef, FunctionComponent } from 'react';
 
 import {
   FormControl,
@@ -29,13 +29,13 @@ export const Input: FunctionComponent<InputProps> = forwardRef<
         variant="filled"
         isInvalid={isInvalid}
         _hover={{ bgColor: 'grey.900' }}
-        errorBorderColor="red.700"
+        errorBorderColor="red.600"
         size="lg"
         ref={ref}
         {...rest}
       />
       {isInvalid && (
-        <FormHelperText color="red.700">{helperText}</FormHelperText>
+        <FormHelperText color="red.600">{helperText}</FormHelperText>
       )}
     </FormControl>
   );

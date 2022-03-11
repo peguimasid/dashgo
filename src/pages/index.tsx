@@ -21,7 +21,7 @@ const defaultValues = {
 };
 
 const Home = () => {
-  const { control, formState, handleSubmit, register } = useForm({
+  const { control, formState, handleSubmit } = useForm({
     mode: 'onChange',
     defaultValues,
     resolver: yupResolver(schema),
