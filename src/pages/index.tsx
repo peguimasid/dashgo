@@ -1,3 +1,5 @@
+import { FunctionComponent, useCallback, useMemo, useState } from 'react';
+
 import { Button, Flex, Stack } from '@chakra-ui/react';
 import { Input } from '../components/Form/Input';
 
@@ -5,7 +7,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { isEmpty } from 'lodash';
 import * as yup from 'yup';
-import { useCallback, useMemo } from 'react';
 
 const schema = yup.object().shape({
   email: yup
@@ -20,7 +21,12 @@ const defaultValues = {
   password: '',
 };
 
-const Home = () => {
+const delay = async (time = 0) =>
+  new Promise((resolve) => setTimeout(resolve, time));
+
+const SignIn: FunctionComponent = () => {
+  const [busy, setBusy] = useState(false);
+
   const { control, formState, handleSubmit } = useForm({
     mode: 'onChange',
     defaultValues,
@@ -30,11 +36,16 @@ const Home = () => {
   const { isValid, dirtyFields, errors } = formState;
 
   const isSubmitButtonDisabled = useMemo(() => {
-    return isEmpty(dirtyFields) || !isValid;
-  }, [dirtyFields, isValid]);
+    return isEmpty(dirtyFields) || !isValid || busy;
+  }, [dirtyFields, isValid, busy]);
 
   const onSubmit = useCallback(async (data) => {
+    setBusy(true);
+
+    await delay(2000);
     console.log(data);
+
+    setBusy(false);
   }, []);
 
   return (
@@ -85,7 +96,8 @@ const Home = () => {
           mt="6"
           size="lg"
           disabled={isSubmitButtonDisabled}
-          // isLoading
+          isLoading={busy}
+          loadingText="Enviando..."
         >
           Enviar
         </Button>
@@ -94,4 +106,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default SignIn;
