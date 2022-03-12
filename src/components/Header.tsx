@@ -1,14 +1,27 @@
 import { FunctionComponent } from 'react';
 
-import { Flex, Icon, IconButton, Input, Text } from '@chakra-ui/react';
-import { RiSearchLine } from 'react-icons/ri';
+import {
+  Flex,
+  Icon,
+  IconButton,
+  Input,
+  HStack,
+  Text,
+  Box,
+  Avatar,
+} from '@chakra-ui/react';
+import {
+  RiNotificationLine,
+  RiSearchLine,
+  RiUserAddLine,
+} from 'react-icons/ri';
 
 const Header: FunctionComponent = () => {
   return (
     <Flex
       as="header"
       w="100%"
-      maxW={1420}
+      maxW={1480}
       h="20"
       mx="auto"
       mt="4"
@@ -52,6 +65,34 @@ const Header: FunctionComponent = () => {
           aria-label="search-in-platform"
           icon={<RiSearchLine />}
         />
+      </Flex>
+
+      <Flex align="center" ml="auto">
+        <HStack
+          spacing="8"
+          mx="8"
+          pr="8"
+          py="1"
+          color="gray.300"
+          borderRightWidth={1}
+          borderColor="gray.700"
+        >
+          <Icon as={RiNotificationLine} fontSize="20" />
+          <Icon as={RiUserAddLine} fontSize="20" />
+        </HStack>
+        <Flex align="center">
+          <Box mr="4" textAlign="right">
+            <Text>Guilhermo Masid</Text>
+            <Text color="gray.300" fontSize="sm">
+              guilhermomasid@gmail.com
+            </Text>
+          </Box>
+          <Avatar
+            size="md"
+            name="Guilhermo Masid"
+            src="https://github.com/peguimasid.png"
+          />
+        </Flex>
       </Flex>
     </Flex>
   );
